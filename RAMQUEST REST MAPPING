@@ -1,0 +1,542 @@
+RAMQUEST REST MAPPING
+
+
+[
+  {
+    "CSFieldName": "CSNoReplyEmailAddress",
+    "DisplayName": "CSNoReplyEmailAddress [Do not remove]",
+    "SourceFieldName": ""
+  },
+  {
+    "CSFieldName": "CSDesktopUrl",
+    "DisplayName": "CSDesktopUrl [CloseSimple local Outlook service]",
+    "SourceFieldName": "http://localhost:48752/api/outlook/"
+  },
+  {
+    "CSFieldName": "CompanyName",
+    "DisplayName": "Company Name",
+    "SourceFieldName": "Close Simple Title"
+  },
+  {
+    "CSFieldName": "FraudDisclaimer",
+    "DisplayName": "FraudDisclaimer"
+  },
+  {
+    "CSFieldName": "LegalDisclaimer",
+    "DisplayName": "LegalDisclaimer"
+  },
+  {
+    "CSFieldName": "ClosingTeams-Key",
+    "DisplayName": "ClosingTeams-Key [do not delete, link data to ClosingTeams]",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'closingAgent.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "Branch_ClosingTeams-Key",
+    "DisplayName": "Branch_ClosingTeams-Key [do not delete, link data to ClosingTeams]",
+    "SourceFieldName": "Branch_${}"
+  },
+  {
+    "CSFieldName": "EscrowProcessor_ClosingTeams-Key",
+    "DisplayName": "EscrowProcessor_ClosingTeams-Key [do not delete, link data to ClosingTeams]",
+    "SourceFieldName": "EscrowProcessor_${??Same as closing agent???}"
+  },
+  {
+    "CSFieldName": "Branch",
+    "DisplayName": "Branch",
+    "SourceFieldName": "${_.get(obj,'OrderResult.detail.branch')}"
+  },
+  {
+    "CSFieldName": "EOEmail",
+    "DisplayName": "Escrow Officer Email",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'closingAgent.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "CloserEmail",
+    "DisplayName": "Closer Email",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'closingAgent.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "CloserName",
+    "DisplayName": "Closer Name",
+    "SourceFieldName": "Jessica"
+  },
+  {
+    "CSFieldName": "CloserFirstName",
+    "DisplayName": "Closer First Name",
+    "SourceFieldName": "Jessica"
+  },
+  {
+    "CSFieldName": "CloserLastName",
+    "DisplayName": "Closer Last Name",
+    "SourceFieldName": "Closer"
+  },
+  {
+    "CSFieldName": "CloserCellPhone",
+    "DisplayName": "Closer Cell",
+    "SourceFieldName": "6513987578"
+  },
+  {
+    "CSFieldName": "CloserPhone",
+    "DisplayName": "Closer Phone"
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'closingAgent.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessPhone'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "OutlookClosingCalendarName",
+    "DisplayName": "Outlook closing calendar name"
+    "Value": [
+      "Calendar"
+    ]
+  },
+  {
+    "CSFieldName": "CloserSignature",
+    "DisplayName": "Closer Signature Display"
+    "Value": [
+      "Sig"
+    ],
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "ClosingTeam",
+    "DisplayName": "Closing Team Display",
+    "Value": [
+      "Closing Team"
+    ]
+  },
+  {
+    "CSFieldName": "FileNumber",
+    "DisplayName": "File Number",
+    "SourceFieldName": "<%= _.get(obj,'OrderResult.detail.fileNumber')%>"
+  },
+  {
+    "CSFieldName": "PropertyAddress",
+    "DisplayName": "Property Address",
+    "SourceFieldName": "<%= _.get(obj,'OrderResult.properties[0].address.line1')%> <%= _.get(obj,'OrderResult.properties[0].address.line2')%> <%= _.get(obj,'OrderResult.properties[0].address.city')%> <%= _.get(obj,'OrderResult.properties[0].address.state')%> <%= _.get(obj,'OrderResult.properties[0].address.zip')%>"
+  },
+  {
+    "CSFieldName": "PropertyCity",
+    "DisplayName": "Property City",
+    "SourceFieldName": "<%= _.get(obj,'OrderResult.properties[0].address.city')%>"
+  },
+  {
+    "CSFieldName": "PropertyState",
+    "DisplayName": "Property State",
+    "SourceFieldName": "<%= _.get(obj,'OrderResult.properties[0].address.state')%>"
+  },
+  {
+    "CSFieldName": "PropertyZipCode",
+    "DisplayName": "Property ZIP",
+    "SourceFieldName": "<%= _.get(obj,'OrderResult.properties[0].address.zip')%>"
+  },
+  {
+    "CSFieldName": "BuyerFirstName",
+    "DisplayName": "Buyer First Name",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'first')).toString() %>"
+  },
+  {
+    "CSFieldName": "BuyerLastName",
+    "DisplayName": "Buyer Last Name",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'last')).toString() %>"
+  },
+  {
+    "CSFieldName": "BuyerEmail",
+    "DisplayName": "Buyer Email",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Email'})),'value')).toString() %>"
+  },
+  {
+    "CSFieldName": "BuyerNames",
+    "DisplayName": "Buyer Names",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'full')).toString() %>"
+  },
+  {
+    "CSFieldName": "BuyerFirstNameAll",
+    "DisplayName": "Buyer First Name All",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'first')).join().split(', ').toString().replace(/(.*),(.*)$/, '$1 & $2').replace(/,/g, ', ')%>"
+  },
+  {
+    "CSFieldName": "SellerNames",
+    "DisplayName": "Seller Names",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'full')).toString()}"
+  },
+  {
+    "CSFieldName": "BuyerCellPhone",
+    "DisplayName": "Buyer Cell Phone",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'primaryName.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString() %>"
+  },
+  {
+    "CSFieldName": "BuyerPhone",
+    "DisplayName": "Buyer Phone",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "SellerFirstName",
+    "DisplayName": "Seller First Name",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'first')).toString()}"
+  },
+  {
+    "CSFieldName": "SellerFirstNameAll",
+    "DisplayName": "Seller First Name All",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'first')).join().split(', ').toString().replace(/(.*),(.*)$/, '$1 & $2').replace(/,/g, ', ')}"
+  },
+  {
+    "CSFieldName": "SellerLastName",
+    "DisplayName": "Seller Last Name",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'name'),'last')).toString()}"
+  },
+  {
+    "CSFieldName": "SellerEmail",
+    "DisplayName": "Seller Email",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString() %>"
+  },
+  {
+    "CSFieldName": "SellerCellPhone",
+    "DisplayName": "Seller Cell",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'primaryName.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString() %>"
+  },
+  {
+    "CSFieldName": "SellerPhone",
+    "DisplayName": "Seller Phone",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "CloserAdminEmail",
+    "DisplayName": "Closer Admin Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "SchedulingAdminEmail",
+    "DisplayName": "Scheduling Admin Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "SellingAgentName",
+    "DisplayName": "Selling Agent Name",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'realtor.partyIdReference').includes(e.partyId)),'name'),'business')).toString()}"
+  },
+  {
+    "CSFieldName": "SellingAgentEmail",
+    "DisplayName": "Selling Agent Email",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'realtor.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString() %>"
+  },
+  {
+    "CSFieldName": "SellingAgentAssistantEmail",
+    "DisplayName": "Selling Agent Assistant Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "SellingAgentCellPhone",
+    "DisplayName": "Selling Agent Cell",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'realtor.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString()}"
+  },
+  {
+    "CSFieldName": "SellingAgentPhone",
+    "DisplayName": "Selling Agent Phone",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'realtor.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessPhone'})),'value')).toString()}"
+  },
+  {
+    "CSFieldName": "ListingAgentName",
+    "DisplayName": "Listing Agent Name",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'realtor.partyIdReference').includes(e.partyId)),'name'),'business')).toString()}"
+  },
+  {
+    "CSFieldName": "ListingAgentEmail",
+    "DisplayName": "Listing Agent Email",
+    "SourceFieldName": "<%= _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'realtor.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()%>"
+  },
+  {
+    "CSFieldName": "ListingAgentAssistantEmail",
+    "DisplayName": "Listing Agent Assistant",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "ListingAgentPhone",
+    "DisplayName": "ListingAgentPhone",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "ListingAgentCellPhone",
+    "DisplayName": "Listing Agent Cell",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'realtor.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString()}"
+  },
+  {
+    "CSFieldName": "LenderName",
+    "DisplayName": "Lender Name",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "MortgageLenderCo",
+    "DisplayName": "Mortgage Lender Company",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.financial.loans,'lender.partyIdReference').includes(e.partyId)),'name'),'business')).toString()}"
+  },
+  {
+    "CSFieldName": "MortgageLenderEmail",
+    "DisplayName": "Mortgage Lender Email",
+    "SourceFieldName": "${_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.financial.loans,'lender.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()}"
+  },
+  {
+    "CSFieldName": "LoanOfficerName",
+    "DisplayName": "Loan Officer Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "LoanOfficerEmail",
+    "DisplayName": "Loan Officer Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "LoanProcessorName",
+    "DisplayName": "Loan Processor Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "LoanProcessorEmail",
+    "DisplayName": "Loan Processor Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "MortgageBrokerCo",
+    "DisplayName": "Mortgage Broker Company",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "MortgageBrokerName",
+    "DisplayName": "Mortgage Broker",
+    "SourceFieldName": "{_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.financial.loans,'mortgageBroker.partyIdReference').includes(e.partyId)),'name'),'business')).toString()}"
+  },
+  {
+    "CSFieldName": "MortgageBrokerEmail",
+    "DisplayName": "Mortgage Broker Email",
+    "SourceFieldName": "{_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.financial.loans,'mortgageBroker.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()}"
+  },
+  {
+    "CSFieldName": "MortgageBrokerAssistantName",
+    "DisplayName": "Mortgage Broker Assistant Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "MortgageBrokerAssistantEmail",
+    "DisplayName": "Mortgage Assistant Email",
+    "SourceFieldName": ""
+  },
+  {
+    "CSFieldName": "OppositeTitleCo",
+    "DisplayName": "Opposite Title Co",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserName",
+    "DisplayName": "Opposite Closer Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserPhone",
+    "DisplayName": "OppositeCloserPhone",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserCellPhone",
+    "DisplayName": "Opposite Closer Cell",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserEmail",
+    "DisplayName": "Opposite Closer Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserAssistantName",
+    "DisplayName": "Opposite Closer Assistant Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserAssistantPhone",
+    "DisplayName": "Opposite Closer Assistant Phone",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OppositeCloserAssistantEmail",
+    "DisplayName": "Opposite Closer Assistant Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "AttorneyNameSeller",
+    "DisplayName": "Attorney Name Seller",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'attorney.partyIdReference').includes(e.partyId)),'name'),'full')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyPhoneSeller",
+    "DisplayName": "AttorneyPhone Seller",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "AttorneyCellPhoneSeller",
+    "DisplayName": "Attorney Cell Seller",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'attorney.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyEmailSeller",
+    "DisplayName": "Attorney Email Seller",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.sellers,'attorney.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyNameBuyer",
+    "DisplayName": "Attorney Name Buyer",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'attorney.partyIdReference').includes(e.partyId)),'name'),'full')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyPhoneBuyer",
+    "DisplayName": "AttorneyPhone Buyer",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "AttorneyCellPhoneBuyer",
+    "DisplayName": "Attorney Cell Buyer",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'attorney.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'Cellular'})),'value')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyEmailBuyer",
+    "DisplayName": "Attorney Email Buyer",
+    "SourceFieldName": "<%=_.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>_.flatMap(obj.OrderResult.transactionParties.buyers,'attorney.partyIdReference').includes(e.partyId)),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()%>"
+  },
+  {
+    "CSFieldName": "AttorneyAssistantName",
+    "DisplayName": "Attorney Assistant Name",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "AttorneyAssistantPhone",
+    "DisplayName": "Attorney Assistant Phone",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OtherCloserEmail",
+    "DisplayName": "Other Closer Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "OtherCloserAssistantEmail",
+    "DisplayName": "Other Closer Assistant Email",
+    "SourceFieldName": " "
+  },
+  {
+    "CSFieldName": "PlaceOfClosing",
+    "DisplayName": "PlaceOfClosing",
+    "SourceFieldName": ""
+  },
+  {
+    "CSFieldName": "SourcePlaceOfClosingContact",
+    "DisplayName": "SourcePlaceOfClosingContact",
+    "SourceFieldName": ""
+  },
+  {
+    "CSFieldName": "SourceClosingDateTime",
+    "DisplayName": "SourceClosingDateTime",
+    "SourceFieldName": ""
+  },
+  {
+    "CSFieldName": "GoogleLink",
+    "DisplayName": "GoogleLink",
+    "SourceFieldName": "Will be generated"
+  },
+  {
+    "CSFieldName": "OutlookLink",
+    "DisplayName": "OutlookLink",
+    "SourceFieldName": "Will be generated"
+  },
+  {
+    "CSFieldName": "GoogleMapsLink",
+    "DisplayName": "GoogleMapsLink",
+    "SourceFieldName": "Will be generated"
+  },
+  {
+    "CSFieldName": "CalendarInvite",
+    "DisplayName": "CalendarInvite",
+    "SourceFieldName": "Will be generated"
+  },
+  {
+    "CSFieldName": "Rescheduled",
+    "DisplayName": "Rescheduled",
+    "SourceFieldName": "Will be generated"
+  },
+  {
+    "CSFieldName": "PlaceOfClosingName",
+    "DisplayName": "PlaceOfClosingName",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "PlaceOfClosingAddress",
+    "DisplayName": "PlaceOfClosingAddress",
+    "SourceFieldName": "<%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'line1')).toString()})()%> <%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'city')).toString()})()%> <%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'state')).toString()})()%> <%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'zip')).toString()})() %>"
+  },
+  {
+    "CSFieldName": "PlaceOfClosingCityStateZip",
+    "DisplayName": "PlaceOfClosingCityStateZip",
+    "SourceFieldName": "<%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'city')).toString()})()%> <%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'state')).toString()})()%> <%=(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'addresses'),_.matches({'type': 'Business'})),'zip')).toString()})() %>"
+  },
+  {
+    "CSFieldName": "PlaceOfClosingPhone",
+    "DisplayName": "PlaceOfClosingPhone",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessPhone'})),'value')).toString()})()}"
+  },
+  {
+    "CSFieldName": "SourceClosingDate",
+    "DisplayName": "SourceClosingDate",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "SourceClosingTime",
+    "DisplayName": "SourceClosingTime",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "MortgageAssistantEmail",
+    "DisplayName": "Mortgage Assistant Email",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "EscrowProcessorEmail",
+    "DisplayName": "Escrow Processor Email",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'escrowProcessor.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "PlaceOfClosingEmail",
+    "DisplayName": "Place of Closing Email",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'placeOfClosing.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "NotUsedAttachmentBaseFileName",
+    "DisplayName": "AttachmentBaseFileName - used to auto gen attachmentnames",
+    "SourceFieldName": "${}_"
+  },
+  {
+    "CSFieldName": "timeZone",
+    "SourceFieldName": "America/Chicago"
+  }
+]
+
+/*
+  {
+    "CSFieldName": "Customer",
+    "DisplayName": "Customer",
+    "SourceFieldName": "${}"
+  },
+  {
+    "CSFieldName": "CustomerEmail",
+    "DisplayName": "Customer Email",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'customer.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'BusinessEmail'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "CustomerCellPhone",
+    "DisplayName": "Customer Cell Phone",
+    "SourceFieldName": "${(()=>{var objIds=_.get(obj.OrderResult.detail.agents,'customer.partyIdReference'); return _.uniq(_.flatMap(_.filter(_.flatMap(obj.OrderResult.parties.filter(e=>e.partyId == objIds),'communications'),_.matches({'type': 'Cellular'})),'value')).toString()})();}"
+  },
+  {
+    "CSFieldName": "SalesPrice",
+    "DisplayName": "Sales Price",
+    "SourceFieldName": "${_.get(obj,'OrderResult.financial.purchasePrice').toLocaleString('en-US',{style:'currency',currency:'USD'})}"
+  },
+  {
+    "CSFieldName": "LoanNumber",
+    "DisplayName": "Loan Number",
+    "SourceFieldName": "${}"
+  },
+*/
